@@ -41,4 +41,19 @@ export class BooksService {
       },
     });
   }
+  async delete(id: string) {
+    const alreadyExists = await this.prisma.book.findUnique({
+      where: {
+        id,
+      },
+    });
+    if (!alreadyExists) {
+      throw new Error('Book does not exists');
+    }
+    return await this.prisma.book.delete({
+      where: {
+        id,
+      },
+    });
+  }
 }
