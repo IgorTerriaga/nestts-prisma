@@ -22,4 +22,7 @@ export class BooksService {
 
     return book;
   }
+  async findAll() {
+    return this.prisma.book.findMany();
+  }
 }

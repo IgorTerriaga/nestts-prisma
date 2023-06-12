@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { BooksService } from './books.service';
 import { Book } from '@prisma/client';
 
@@ -9,5 +9,10 @@ export class BooksController {
   @Post()
   async create(@Body() data: Book) {
     return this.booksService.create(data);
+  }
+
+  @Get()
+  async findAll() {
+    return this.booksService.findAll();
   }
 }
