@@ -1,6 +1,7 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { BooksService } from './books.service';
 import { Book } from '@prisma/client';
+import { BookDTO } from './book.dto';
 
 @Controller('book')
 export class BooksController {
@@ -14,5 +15,9 @@ export class BooksController {
   @Get()
   async findAll() {
     return this.booksService.findAll();
+  }
+  @Put(':id')
+  async update(@Param('id') id: string, @Body() data: BookDTO) {
+    return this.booksService.update(id, data);
   }
 }
